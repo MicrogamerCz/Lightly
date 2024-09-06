@@ -62,8 +62,6 @@ find_package(KF6FrameworkIntegration ${KF6_MIN_VERSION} CONFIG )
 set(LIGHTLY_HAVE_KSTYLE ${KF6FrameworkIntegration_FOUND})
 set(LIGHTLY_HAVE_QTQUICK ${Qt6Quick_FOUND})
 
-
-add_subdirectory(colors)
 add_subdirectory(kstyle kstyle6)
 add_subdirectory(liblightlycommon liblightlycommon6)
 
@@ -71,23 +69,8 @@ ki18n_install(po)
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 include(ECMSetupVersion)
-ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX LIGHTLY
-                 PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/LightlyConfigVersion.cmake"
-                  )
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/Lightly")
-
-configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/LightlyConfig.cmake.in"
-                                  "${CMAKE_CURRENT_BINARY_DIR}/LightlyConfig.cmake"
-                                  PATH_VARS KDE_INSTALL_FULL_DATADIR
-                                  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-                              )
-
-install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/LightlyConfig.cmake"
-                   "${CMAKE_CURRENT_BINARY_DIR}/LightlyConfigVersion.cmake"
-            DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-            COMPONENT Devel
-          )
 
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)

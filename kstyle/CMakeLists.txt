@@ -53,7 +53,6 @@ set(lightly_PART_SRCS
     lightlywindowmanager.cpp
 )
 
-# kconfig_add_kcfg_files(lightly_PART_SRCS ../kdecoration/lightlysettings.kcfgc)
 kconfig_add_kcfg_files(lightly_PART_SRCS lightlystyleconfigdata.kcfgc)
 
 add_library(lightly${QT_MAJOR_VERSION} MODULE ${lightly_PART_SRCS})
@@ -96,4 +95,3 @@ endif()
 
 ########### install files ###############
 install(TARGETS lightly${QT_MAJOR_VERSION} DESTINATION styles/)
-install(FILES lightly.themerc  DESTINATION  ${KDE_INSTALL_DATADIR}/kstyle/themes)
