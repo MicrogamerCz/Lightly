@@ -1,3 +1,6 @@
 .vscode/
 build/
 .clang-format
+.flatpak-builder/
+lightly-master/
+*.flatpak

@@ -95,5 +95,5 @@ endif()
 
 
 ########### install files ###############
-install(TARGETS lightly${QT_MAJOR_VERSION} DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/styles/)
+install(TARGETS lightly${QT_MAJOR_VERSION} DESTINATION styles/)
 install(FILES lightly.themerc  DESTINATION  ${KDE_INSTALL_DATADIR}/kstyle/themes)
