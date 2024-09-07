@@ -1,101 +1,38 @@
-<p align="center">
-  <img src="logo.png"/>
-</p>
-
-**This is a personal fork of Lightly where I merge pull requests sent to [Luwx/Lightly](https://github.com/Luwx/Lightly)**
-
 *Lightly* is a fork of breeze theme style that aims to be visually modern and minimalistic.
 
-# Notes about this fork
+This fork is "porting" Lightly to Flatpak.
 
-- Do not open pull requests directly here unless they change/require some code that has diverged from upstream
-- If the pull request can sucessfully be merged into [Luwx/Lightly](https://github.com/Luwx/Lightly), please open it there and I will merge it here. My intention is not for this to be a permanent fork (hopefully Luwx comes back!)
-- Similarly, don't open issues here unless the issue was likely caused by some code here that's not in [Luwx/Lightly](https://github.com/Luwx/Lightly)
+## Supported runtimes
 
-These rules are because I don't want to diverge too far from upstream. It should be easy for Luwx to catch up.
+org.kde.Platform/x86_64/5.15-23.08 (separate branch)
+org.kde.Platform/x86_64/6.6
+org.kde.Platform/x86_64/6.7
 
-Thanks ❤️🐢
+## Installation
 
-## Development ⚠️
+### Package
 
-Lightly is a work in progress theme, there is still a lot to change, so expect bugs! Some applications may suddenly crash or flicker.
+1. Download from releases 
+2. Run `flatpak install lightly_<version>flatpak` inside the dowload directory or double-click it to open and install in Discover
 
-## Screenshots
+### Building and installing from source
 
-![default](https://github.com/Luwx/Lightly/blob/master/Lightly-default.png)
+``` bash
+git clone --depth=1 https://github.com/MicrogamerCz/Lightly && cd Lightly
 
-With transparent dolphin view off and no sidebar transparency:
-![custom](https://github.com/Luwx/Lightly/blob/master/Lightly-custom.png)
+# User-wide installation
+flatpak-builder build --user --force-clean --ccache --install org.kde.KStyle.Lightly.json 
 
-With a full glass color scheme (currently full glass color schemes are very buggy and not fully supported):
-![fullglass](https://github.com/Luwx/Lightly/blob/master/Lightly-fullglass.png)
-
-## Configuration
-
-![config page](https://github.com/Luwx/Lightly/blob/master/config.png)
-
-Lightly configuration page can be found in the KDE system settings under the Application style section. 
-
-
-Most of these options are inherited from Breeze style, but Lightly has a few exclusive options that are enabled by default, including:
-
-* Transparent Dolphin view (under the **frames** tab). This option disables the background and shadows of Dolphin view widget and draws top and bottom separators when the view has scrollable content.
-
-*  Sidebar opacity (under the **transparency** tab). By default, it's 60. If it's bellow 100, shadows will be drawn automatically. 
-
-The toolbar and menubar will follow the **titlebar** opacity. To configure the titlebar opacity, you will have to change the color scheme file directly in ~/.local/share/color-schemes. Open your desired color scheme and, in the ```[WM]``` section, add a fourth value to ```activeBackground``` and ```inactiveBackground```, like ```activeBackground=0,0,0,127``` where the last value is the alpha, that ranges from 0 (completely transparent) to 255 (totally opaque).
-
-## Manual installation
-
-### Dependencies
-
-Taken from https://github.com/n4n0GH/hello
-
-#### Ubuntu
-```
-sudo apt install cmake build-essential libkf5config-dev libkdecorations2-dev libqt5x11extras5-dev qtdeclarative5-dev extra-cmake-modules libkf5guiaddons-dev libkf5configwidgets-dev libkf5windowsystem-dev libkf5coreaddons-dev libkf5iconthemes-dev gettext qt3d5-dev
+# System-wide installation
+sudo flatpak-builder build --force-clean --ccache --install org.kde.KStyle.Lightly.json
 ```
 
-#### Arch Linux
-```
-sudo pacman -S cmake extra-cmake-modules kdecoration qt5-declarative qt5-x11extras
-```
+### Building and installing package from source
 
-#### Fedora
-```
-sudo dnf install cmake extra-cmake-modules "cmake(Qt5Core)" "cmake(Qt5Gui)" "cmake(Qt5DBus)" "cmake(Qt5X11Extras)" "cmake(KF5GuiAddons)" "cmake(KF5WindowSystem)" "cmake(KF5I18n)" "cmake(KDecoration2)" "cmake(KF5CoreAddons)" "cmake(KF5ConfigWidgets)" "cmake(Qt5UiTools)" "cmake(KF5GlobalAccel)" "cmake(KF5IconThemes)" kwin-devel libepoxy-devel "cmake(KF5Init)" "cmake(KF5Crash)" "cmake(KF5KIO)" "cmake(KF5Notifications)" kf5-kpackage-devel
-```
+``` bash
+git clone --depth=1 https://github.com/MicrogamerCz/Lightly && cd Lightly
 
-#### openSUSE
+flatpak-builder flatpak-build-dir --repo=lightly-master --force-clean --ccache org.kde.KStyle.Lightly.json
+
+flatpak build-bundle --runtime lightly-master/ lightly_<version>.flatpak runtime/org.kde.KStyle.Lightly/x86_64/<version>
 ```
-sudo zypper install cmake gcc-c++ extra-cmake-modules libQt5Gui-devel libQt5DBus-devel libqt5-qttools-devel libqt5-qtx11extras-devel libQt5OpenGL-devel libQt5Network-devel libepoxy-devel kconfig-devel kconfigwidgets-devel kcrash-devel kglobalaccel-devel ki18n-devel kio-devel kservice-devel kinit-devel knotifications-devel kwindowsystem-devel kguiaddons-devel kiconthemes-devel kpackage-devel kwin5-devel xcb-util-devel xcb-util-cursor-devel xcb-util-wm-devel xcb-util-keysyms-devel
-```
-
-#### Solus
-```
-sudo eopkg install extra-cmake-modules kdecoration-devel qt5-declarative-devel qt5-x11extras-devel qt5-base-devel kcoreaddons-devel kguiaddons-devel kconfigwidgets-devel kwindowsystem-devel ki18n-devel kiconthemes-devel kcmutils-devel libxcb-devel xcb-util-devel qt5-wayland-devel kwayland-devel wayland-devel frameworkintegration-devel
-```
-
-
-### Build and install
-
-```
-git clone --single-branch --depth=1 https://github.com/boehs/Lightly.git
-cd Lightly && mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib -DBUILD_TESTING=OFF ..
-make
-sudo make install
-```
-
-For RedHat-based distros (like Fedora and OpenSUSE), run `cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib64 -DBUILD_TESTING=OFF ..` instead (#4)
-
-### Uninstall
-
-In the build folder:
-```
-sudo make uninstall
-```
-
-## Acknowledgments
-
-Breeze authors and Kvantum developer Pedram Pourang.

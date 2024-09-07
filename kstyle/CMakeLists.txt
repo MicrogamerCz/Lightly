@@ -126,8 +126,8 @@ endif()
 
 
 ########### install files ###############
-install(TARGETS lightly DESTINATION ${QT_PLUGIN_INSTALL_DIR}/styles/)
-install(FILES lightly.themerc  DESTINATION  ${DATA_INSTALL_DIR}/kstyle/themes)
+install(TARGETS lightly DESTINATION styles/)
+# install(FILES lightly.themerc  DESTINATION  ${DATA_INSTALL_DIR}/kstyle/themes)
 
 ########### subdirectories ###############
-add_subdirectory(config)
+# add_subdirectory(config)
