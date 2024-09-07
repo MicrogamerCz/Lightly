@@ -5,6 +5,7 @@ This fork is "porting" Lightly to Flatpak.
 ## Supported runtimes
 
 org.kde.Platform/x86_64/6.6
+
 org.kde.Platform/x86_64/6.7
 
 ## Installation
