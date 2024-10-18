@@ -4,6 +4,8 @@ find_package(KF5 REQUIRED COMPONENTS
     I18n
     Config
     GuiAddons
+    IconThemes
+    ConfigWidgets
     WindowSystem)
 
 find_package(Qt5 COMPONENTS Quick)
@@ -100,7 +102,7 @@ target_link_libraries(lightly Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus)
 if( LIGHTLY_HAVE_QTQUICK )
     target_link_libraries(lightly Qt5::Quick)
 endif()
-target_link_libraries(lightly KF5::ConfigCore KF5::GuiAddons KF5::WindowSystem)
+target_link_libraries(lightly KF5::ConfigCore KF5::ConfigWidgets KF5::GuiAddons KF5::IconThemes KF5::WindowSystem)
 target_link_libraries(lightly lightlycommon5)
 
 if(KF5FrameworkIntegration_FOUND)
